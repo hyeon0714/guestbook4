@@ -1,5 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>        
+    
 <!DOCTYPE html>
 <html>
 <head>
@@ -8,14 +11,14 @@
 
 </head>
 <body>
-	<form>
+	<form action="/guestbook4/guest/add" method="get">
 		<table border="1" width="540px">
 			<tr>
-				<td>이름</td><td><input type="text" name=""></td>
-				<td>비밀번호</td><td><input type="password" name=""></td>
+				<td>이름</td><td><input type="text" name="name"></td>
+				<td>비밀번호</td><td><input type="password" name="password"></td>
 			</tr>
 			<tr>
-				<td colspan="4"><textarea cols="72" rows="5"></textarea></td>
+				<td colspan="4"><textarea cols="72" rows="5" name="content"></textarea></td>
 			</tr>
 			<tr>
 				<td colspan="4"><button type="">등록</button></td>
@@ -24,44 +27,20 @@
 	</form>
 	<br>
 
+	<c:forEach items="${requestScope.gList }" var="gList" varStatus="status">
+	<table border="1" width="540px">
+		<tr>
+			<td>[${status.count }]</td>
+			<td>${gList.name }</td>
+			<td>${gList.date }</td>
+			<td><a href="/guestbook4/guest/deleteform?no=${gList.no }">삭제</a></td>
+		</tr>
+		<tr>
+			<td colspan="4">${gList.content }</td>
+		</tr>
+	</table>
+	<br>
+	</c:forEach>
 	
-	<table border="1" width="540px">
-		<tr>
-			<td>[1]</td>
-			<td>이효리</td>
-			<td>2022-01-01</td>
-			<td><a href="">삭제</a></td>
-		</tr>
-		<tr>
-			<td colspan="4">방문하고 갑니다.</td>
-		</tr>
-	</table>
-	<br>
-	
-	<table border="1" width="540px">
-		<tr>
-			<td>[1]</td>
-			<td>이효리</td>
-			<td>2022-01-01</td>
-			<td><a href="">삭제</a></td>
-		</tr>
-		<tr>
-			<td colspan="4">방문하고 갑니다.</td>
-		</tr>
-	</table>
-	<br>
-
-	<table border="1" width="540px">
-		<tr>
-			<td>[1]</td>
-			<td>이효리</td>
-			<td>2022-01-01</td>
-			<td><a href="">삭제</a></td>
-		</tr>
-		<tr>
-			<td colspan="4">방문하고 갑니다.</td>
-		</tr>
-	</table>
-	<br>
 </body>
 </html>
